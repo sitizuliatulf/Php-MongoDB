@@ -6,7 +6,8 @@ $config['css'] = [
 ];
 
 $config['js'] = [
-    './js/jquery/jquery.min.js'
+    './js/jquery/jquery.min.js',
+    './js/bootstrap/bootstrap.min.js'
 ];
 
 ?>
