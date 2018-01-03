@@ -23,11 +23,12 @@ class Welcome extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('mongo_db', array('activate' => 'default'), 'mongo_db');
+		$this->load->library('generate_view');
 	}
 	public function index()
 	{
 		$data = $this->mongo_db->get('users');
-		$this->load->view('welcome_message', array('data' => $data));
+		$this->generate_view->view('welcome_message', array('data' => $data));
 	}
 }
 
