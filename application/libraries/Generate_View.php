@@ -1,6 +1,6 @@
 <?php 
 
-class Generate_View {
+class Generate_view {
 	public function view($view, $data) {
 		$CI =& get_instance();
 		$CI->load->view('base/header');

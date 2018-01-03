@@ -25,14 +25,14 @@
 |
 */
 
+//default array active db
 $config['mongo_db']['active'] = 'default';
-
 $config['mongo_db']['default']['no_auth'] = TRUE;
 $config['mongo_db']['default']['hostname'] = 'localhost';
 $config['mongo_db']['default']['port'] = '27017';
 $config['mongo_db']['default']['username'] = '';
 $config['mongo_db']['default']['password'] = '';
-$config['mongo_db']['default']['database'] = 'admin';
+$config['mongo_db']['default']['database'] = 'CRUDMahasiswa';
 $config['mongo_db']['default']['db_debug'] = TRUE;
 $config['mongo_db']['default']['return_as'] = 'array';
 $config['mongo_db']['default']['write_concerns'] = (int)1;
