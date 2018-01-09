@@ -7,6 +7,24 @@ class Add_on {
         $this->CI =& get_instance();
     }
 
+    public function user_is_login($isBackend = false) {
+        $session_user_login = $this->CI->session->userdata('session_user_login');
+        if (is_object($session_user_login)) {
+            if ($isBackend) {
+                if ($session_user_login->_id->{'$id'} !== '' && $session_user_login->isAdmin === true) {
+                    return true;
+                }
+                return false;
+            } else {
+                if ($session_user_login->_id->{'$id'}) {
+                    return true;
+                }
+                return false;
+            }
+        }
+        return false;
+    }
+
     public function set_error_message($message, $type) {
         /*
         type value:
@@ -20,7 +38,7 @@ class Add_on {
             <h4><i class="icon fa fa-ban"></i> '.$this->CI->lang->line($type).'!</h4>
             '.$message.'
         </div>';
-        $this->CI->session->set_userdata('error_message', $error_message);
+        $this->CI->session->set_flashdata('error_message', $error_message);
     }
 
 };

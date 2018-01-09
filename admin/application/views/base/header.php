@@ -18,7 +18,7 @@
 </head>
 <?php 
 	$session_user_login = $this->session->userdata('session_user_login');
-	if (isset($session_user_login->is_admin) && isset($session_user_login->username)) {
+	if (is_object($session_user_login)) {
 ?>
 
 		<body class="hold-transition skin-blue sidebar-mini">
