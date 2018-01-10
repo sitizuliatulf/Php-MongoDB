@@ -11,12 +11,15 @@ class Add_on {
         $session_user_login = $this->CI->session->userdata('session_user_login');
         if (is_object($session_user_login)) {
             if ($isBackend) {
-                if ($session_user_login->_id->{'$id'} !== '' && $session_user_login->isAdmin === true) {
+                if ($session_user_login->_id->{'$id'} !== '' && 
+                $session_user_login->isAdmin === true && 
+                $session_user_login->isDelete === false) {
                     return true;
                 }
                 return false;
             } else {
-                if ($session_user_login->_id->{'$id'}) {
+                if ($session_user_login->_id->{'$id'} && 
+                $session_user_login->isDelete === false) {
                     return true;
                 }
                 return false;
@@ -39,6 +42,24 @@ class Add_on {
             '.$message.'
         </div>';
         $this->CI->session->set_flashdata('error_message', $error_message);
+    }
+
+    public function initial_project() {
+        $this->CI->load->library('mongo_db');
+        if ($this->CI->mongo_db->count('users') > 0) {
+            return true;
+        } 
+        //data temporary admin
+        $tmp_user = array(
+            'username' => "Azhar Prabudi",
+            'email' => "azharprabui@gmail.com",
+            'password' => "faeb3229713fde804c98e9818ad921aa4cc51002",
+            'isAdmin' => true,
+            'lastLoggin' => '',
+            'isDelete' => false
+        );
+        $this->CI->mongo_db->insert('users', $tmp_user);
+        return true;
     }
 
 };

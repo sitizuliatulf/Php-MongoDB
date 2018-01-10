@@ -3,7 +3,7 @@ $session_user_login = $this->session->userdata('session_user_login');
 ?>
 <div class="wrapper">
     <header class="main-header">
-        <a href="index2.html" class="logo">
+        <a href="<?php echo base_url() ?>" class="logo">
             <span class="logo-lg"><b><?php echo $this->lang->line('portal_berita') ?>a</b></span>
         </a>
         <nav class="navbar navbar-static-top">
@@ -32,7 +32,7 @@ $session_user_login = $this->session->userdata('session_user_login');
                                 <a href="#" class="btn btn-default btn-flat"><?php echo $this->lang->line('profile')?></a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat"><?php echo $this->lang->line('signout')?></a>
+                                <a href="javascript:void(0)" class="btn btn-default btn-flat btn-logout"><?php echo $this->lang->line('signout')?></a>
                             </div>
                             </li>
                         </ul>
@@ -74,7 +74,7 @@ $session_user_login = $this->session->userdata('session_user_login');
                 </ul>
             </li>
             <li class="header"><?php echo $this->lang->line('pengaturan') ?></li>
-            <li><a href="https://adminlte.io/docs"><i class="fa fa-sign-out"></i> <span>Keluar</span></a></li>
+            <li><a href="javascript:void(0)" class="btn-logout"><i class="fa fa-sign-out"></i> <span><?php echo $this->lang->lint('signout') ?></span></a></li>
         </section>
     </aside>
     <div class="content-wrapper">

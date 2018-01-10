@@ -26,6 +26,7 @@ $config['js'] = [
     './js/jquery-slimscroll/jquery.slimscroll.min.js',
     './js/fastclick/fastclick.js',
     './js/admin-lte/adminlte.min.js',
+    './js/custom/global.js'
 ];
 
 ?>

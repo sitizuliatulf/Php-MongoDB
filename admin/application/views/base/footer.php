@@ -1,6 +1,9 @@
 </div>
 </div>
 </body>
+<script type="text/javascript">
+    var base_url = "<?php echo base_url() ?>";
+</script>
 <?php 
     if (isset($js)) {
         foreach($js as $key => $value) {
