@@ -74,7 +74,7 @@ $session_user_login = $this->session->userdata('session_user_login');
                 </ul>
             </li>
             <li class="header"><?php echo $this->lang->line('pengaturan') ?></li>
-            <li><a href="javascript:void(0)" class="btn-logout"><i class="fa fa-sign-out"></i> <span><?php echo $this->lang->lint('signout') ?></span></a></li>
+            <li><a href="javascript:void(0)" class="btn-logout"><i class="fa fa-sign-out"></i> <span><?php echo $this->lang->line('signout') ?></span></a></li>
         </section>
     </aside>
     <div class="content-wrapper">
