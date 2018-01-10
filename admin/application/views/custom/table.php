@@ -1,87 +1,63 @@
-<section class="content-header">
-    <h1>
-        Data Tables
-        <small>advanced tables</small>
-    </h1>
-</section>
+<?php 
+
+?>
 <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Hover Data Table</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
-                <thead>
-                <tr role="row"><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Rendering engine</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Browser</th><th class="sorting_desc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" aria-sort="descending">Platform(s)</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Engine version</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">CSS grade</th></tr>
-                </thead>
-                <tbody>
-                <tr role="row" class="odd">
-                  <td class="">Misc</td>
-                  <td>IE Mobile</td>
-                  <td class="sorting_1">Windows Mobile 6</td>
-                  <td>-</td>
-                  <td>C</td>
-                </tr><tr role="row" class="even">
-                  <td class="">Trident</td>
-                  <td>Internet Explorer 7</td>
-                  <td class="sorting_1">Win XP SP2+</td>
-                  <td>7</td>
-                  <td>A</td>
-                </tr><tr role="row" class="odd">
-                  <td class="">Trident</td>
-                  <td>AOL browser (AOL desktop)</td>
-                  <td class="sorting_1">Win XP</td>
-                  <td>6</td>
-                  <td>A</td>
-                </tr><tr role="row" class="even">
-                  <td class="">Gecko</td>
-                  <td>Netscape Browser 8</td>
-                  <td class="sorting_1">Win 98SE+</td>
-                  <td>1.7</td>
-                  <td>A</td>
-                </tr><tr role="row" class="odd">
-                  <td class="">Gecko</td>
-                  <td>Firefox 1.0</td>
-                  <td class="sorting_1">Win 98+ / OSX.2+</td>
-                  <td>1.7</td>
-                  <td>A</td>
-                </tr><tr role="row" class="even">
-                  <td class="">Gecko</td>
-                  <td>Firefox 1.5</td>
-                  <td class="sorting_1">Win 98+ / OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr><tr role="row" class="odd">
-                  <td class="">Gecko</td>
-                  <td>Firefox 2.0</td>
-                  <td class="sorting_1">Win 98+ / OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr><tr role="row" class="even">
-                  <td class="">Gecko</td>
-                  <td>Netscape Navigator 9</td>
-                  <td class="sorting_1">Win 98+ / OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr><tr role="row" class="odd">
-                  <td class="">Gecko</td>
-                  <td>Seamonkey 1.1</td>
-                  <td class="sorting_1">Win 98+ / OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr><tr role="row" class="even">
-                  <td class="">Gecko</td>
-                  <td>Mozilla 1.7</td>
-                  <td class="sorting_1">Win 98+ / OSX.1+</td>
-                  <td>1.7</td>
-                  <td>A</td>
-                </tr></tbody>
-              </table>
-            </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+      <div class="box-header">
+        <h3 class="box-title"></h3>
+        <div class="box-tools">
+          <ul class="pagination pagination-sm no-margin pull-right">
+            <li><a href="#">«</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">»</a></li>
+          </ul>
         </div>
+      </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th>No. </th>
+                <?php 
+                  if (isset($column)) {
+                    foreach ($column as $column_key => $column_value) {
+                ?>
+                  <th><?php echo $this->lang->line($column_value) ?></th>
+                <?php
+                    }
+                  }
+                ?>
+                <th>#</th>
+              </tr>
+              <tr>
+                <?php
+                  if (isset($data['data'])) {
+                    foreach ($data['data'] as $data_key => $data_value) {
+                ?>
+                  <td><?php echo $data_key + 1 ?></td>
+                      <?php
+                        if (isset($column)) {
+                          foreach ($column as $column_key => $column_value) {
+                      ?>
+                          <td><?php echo $data_value[$column_value] ?></td>
+                      <?php
+                          }
+                        }
+                      ?>
+                <?php
+                    }
+                  } 
+                ?>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-    <div class="row"><div class="col-sm-5"><div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example2_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div></div>
+  </div>      
 </section>

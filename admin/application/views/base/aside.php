@@ -78,3 +78,8 @@ $session_user_login = $this->session->userdata('session_user_login');
         </section>
     </aside>
     <div class="content-wrapper">
+        <section class="content-header">
+        <h1>
+            <?php echo 'Data '.ucFirst($this->lang->line($this->uri->segment(1))) ?>
+        </h1>
+        </section>

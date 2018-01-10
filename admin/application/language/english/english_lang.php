@@ -18,7 +18,7 @@ $lang['articles'] = 'Berita';
 $lang['article_categories'] = 'Kategori Berita';
 $lang['list_articles'] = 'Daftar Berita';
 $lang['pengaturan'] = 'Pengaturan';
-
-
+$lang['username'] = 'Username';
+$lang['lastLoggin'] = 'Terakhir Login';
 
 ?>
