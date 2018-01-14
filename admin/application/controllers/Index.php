@@ -12,8 +12,8 @@ class Index extends CI_Controller {
 	}
 	public function index() {
 		$options['css'] = [
-				'./css/custom/login.css'
-			];
+			'./css/custom/login.css'
+		];
 		if ($this->add_on->initial_project()) {
 			if (!$this->add_on->user_is_login(true)) {
 				$this->generate_view->view('login', null, $options);

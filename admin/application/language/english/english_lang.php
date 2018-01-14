@@ -21,5 +21,9 @@ $lang['pengaturan'] = 'Pengaturan';
 $lang['username'] = 'Username';
 $lang['lastLoggin'] = 'Terakhir Login';
 $lang['no.'] = 'No.';
+$lang['edit'] = 'Ubah';
+$lang['delete'] = 'Hapus';
+$lang['registerDate'] = 'Tanggal Pendaftaran';
+$lang['search'] = 'Pencarian';
 
 ?>
