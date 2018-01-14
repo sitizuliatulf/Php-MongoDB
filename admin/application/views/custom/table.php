@@ -24,7 +24,8 @@
               </tr>
               <tr>
                 <?php
-                  if (isset($data['data'])) {
+                  if (isset($data['data']) &&
+                  count($data['data']) > 0) {
                     foreach ($data['data'] as $data_key => $data_value) {
                 ?>
                   <td><?php echo $data_key + 1 ?></td>
@@ -34,8 +35,20 @@
                       ?>
                           <td><?php echo $data_value[$column_value] ?></td>
                       <?php
+                          }  
+                        }
+                        print_r($data);
+                        if (isset($data['custom_action']) && 
+                        count($data['custom_action']) > 0) {
+                          foreach ($data['custom_action'] as $k => $v) {
+                      ?>     
+                            <td>
+                              <a href="<?php echo base_url($v->link.'/'.$column_value->id) ?>" class="btn btn-<?php echo $v->button_style ?>">
+                                <?php echo ucfirst($v->name) ?>
+                              </a>
+                            </td>
+                      <?php  
                           }
-                          
                         }
                       ?>
                 <?php

@@ -53,7 +53,7 @@ class Generate_view {
 		}
 	}
 
-	public function generate_table($data, $column=[], $custom_action=null) {
+	public function generate_table($data, $column=[], $custom_action=[]) {
 		/* 
 		action value = ['edit', 'delete']
 		jika kosong maka kedua button tersebut tidak ditampilkan
@@ -61,11 +61,20 @@ class Generate_view {
 		$this->CI->load->view('base/header', array('css' => $this->CI->config->config['css']));
 		$this->CI->load->view('base/aside');
 		// data dibawah ini digunakan untuk mengkostumisasi table
-		if ($custom_action === null) {
+		if (count($custom_action) < 1) {
+			// edit
 			$tmp = new stdClass();
-			$tmp->name = $this->CI->load->line('edit');
+			$tmp->name = $this->CI->lang->line('edit');
 			$tmp->link = 'edit';
 			$tmp->button_style = 'warning';
+			array_push($custom_action, $tmp);
+			unset ($tmp);
+
+			// delete
+			$tmp = new stdClass();
+			$tmp->name = $this->CI->lang->line('delete');
+			$tmp->link = 'delete';
+			$tmp->button_style = 'danger';
 			array_push($custom_action, $tmp);
 			unset ($tmp);
 		}

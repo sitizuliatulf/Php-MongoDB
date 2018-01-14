@@ -14,7 +14,7 @@ class Users extends CI_Controller {
 	public function index($offset = 0) {
         if ($this->add_on->user_is_login(true)) {
 			// select options 
-			$fields = array('username', 'email', 'lastLoggin');
+			$fields = array('username', 'email', 'lastLoggin', 'registerDate');
 			$where = array('isDelete' => false); 
 			$order_by = array('username' => 'ASC');
 			$data = $this->generate_view->set_offset_and_limit(

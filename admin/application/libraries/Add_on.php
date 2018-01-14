@@ -56,7 +56,8 @@ class Add_on {
             'password' => "faeb3229713fde804c98e9818ad921aa4cc51002",
             'isAdmin' => true,
             'lastLoggin' => '',
-            'isDelete' => false
+            'isDelete' => false,
+            'registerDate' => date_format(new DateTime(), 'U') * 1000 // berikan waktu saat ini
         );
         $this->CI->mongo_db->insert('users', $tmp_user);
         return true;
