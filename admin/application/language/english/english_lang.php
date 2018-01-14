@@ -20,5 +20,6 @@ $lang['list_articles'] = 'Daftar Berita';
 $lang['pengaturan'] = 'Pengaturan';
 $lang['username'] = 'Username';
 $lang['lastLoggin'] = 'Terakhir Login';
+$lang['no.'] = 'No.';
 
 ?>
