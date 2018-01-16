@@ -57,7 +57,7 @@ class Add_on {
             'isAdmin' => true,
             'lastLoggin' => '',
             'isDelete' => false,
-            'registerDate' => date_format(new DateTime(), 'U') * 1000 // berikan waktu saat ini
+            'registerDate' => date("Y-m-d h:i:sa") // berikan waktu saat ini
         );
         $this->CI->mongo_db->insert('users', $tmp_user);
         return true;

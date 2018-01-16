@@ -14,7 +14,11 @@ class Generate_view {
 		$this->CI->mongo_db->limit(10);
 		$this->CI->mongo_db->offset($offset);
 		if (count($fields) > 0) {
-			$this->CI->mongo_db->select($fields);
+			$tmp_fields = [];
+			foreach($fields as $value) {
+				array_push($tmp_fields, $value['name']);
+			};
+			$this->CI->mongo_db->select($tmp_fields);
 		}
 		if (count($order_by) > 0) {
 			$this->CI->mongo_db->order_by($order_by);
@@ -67,16 +71,18 @@ class Generate_view {
 			$tmp->name = $this->CI->lang->line('edit');
 			$tmp->link = 'edit';
 			$tmp->button_style = 'warning';
+			$tmp->icon_name = 'edit';
 			array_push($custom_action, $tmp);
-			unset ($tmp);
+			unset($tmp);
 
 			// delete
 			$tmp = new stdClass();
 			$tmp->name = $this->CI->lang->line('delete');
 			$tmp->link = 'delete';
 			$tmp->button_style = 'danger';
+			$tmp->icon_name = 'close';
 			array_push($custom_action, $tmp);
-			unset ($tmp);
+			unset($tmp);
 		}
 		$data = array(
 			'data' => $data, 

@@ -5,3 +5,5 @@ $('.btn-logout').on('click', function(e) {
         window.location.replace(base_url + 'index/logout');
     }
 });
+
+$('.input-date').datepicker();
