@@ -27,5 +27,11 @@ class Mahasiswa extends CI_Controller {
 			die;
 		}
 	}
+
+	public function registrasi() {
+		echo 1;
+		echo 2;
+		die;
+	}
 }
 
