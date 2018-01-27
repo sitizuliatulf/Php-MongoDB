@@ -25,5 +25,6 @@ $lang['edit'] = 'Ubah';
 $lang['delete'] = 'Hapus';
 $lang['registerDate'] = 'Tanggal Pendaftaran';
 $lang['search'] = 'Pencarian';
+$lang['isDelete'] = 'Aktif';
 
 ?>
