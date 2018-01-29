@@ -55,6 +55,8 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-body">
+          <button class="btn btn-default">Tambah</button>
+          <button class="btn btn-danger">Hapus</button>
           <table class="table table-bordered">
             <tbody>
               <tr>
