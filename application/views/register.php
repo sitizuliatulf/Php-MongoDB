@@ -8,7 +8,7 @@
     }
   ?>
   <h1>register akun</h1>
-  <p>isi data</p>
+  <p>silahkan isi data</p>
     <!-- dalam satu halaman view hanya boleh ada 1 id saja -->
     <form action="" method="POST">
       <div class="form-group">
