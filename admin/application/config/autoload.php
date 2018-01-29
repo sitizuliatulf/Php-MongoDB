@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('session');
+$autoload['libraries'] = array('session', 'mongo_db', 'generate_view', 'add_on', 'pagination');
 
 /*
 | -------------------------------------------------------------------
