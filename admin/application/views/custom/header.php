@@ -56,16 +56,17 @@
       <div class="box">
         <div class="box-body">
           <div class="col-md-12 no-padding" style="margin: 10px 0px;">
-            <button class="btn btn-default">
-              <i class="fa fa-plus"></i> Data Baru
-            </button>
+            <a href="<?php echo base_url().$this->url.'/add_new' ?>" class="btn btn-default">
+              <i class="fa fa-plus"></i> <?php echo $this->lang->line('new_data') ?>
+            </a>
             <button class="btn btn-danger">
-              <i class="fa fa-trash-o"></i> Yang Dipilih
+              <i class="fa fa-trash-o"></i> <?php echo $this->lang->line('has_been_choose') ?>
             </button>
           </div>
           <table class="table table-bordered">
             <tbody>
               <tr>
+                <th><input type="checkbox" id="check-all"></th>
                 <th><?php echo $this->lang->line('no.') ?></th>
                 <?php
                   // munculkan nama kolomnya
@@ -81,7 +82,6 @@
                 ?>
                 <th class="text-center">#</th>
               </tr>
-              <tr>
                 <?php
                   //munculkan data di tabel
                   if (isset($data) &&
@@ -89,6 +89,7 @@
                   count($data) > 0) {
                     foreach ($data as $d_k => $d_v) {
                 ?>
+                  <tr>
                   <td>
                       <input type="checkbox" name="delete[]" />
                   </td>
@@ -121,6 +122,7 @@
                         }
                         ?>
                       </td>
+                    </tr>
                 <?php
                     }
                   } 

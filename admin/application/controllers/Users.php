@@ -72,7 +72,7 @@ class Users extends CI_Controller {
 		$this->generate_view->generate_header($offset);
 	}
 
-	public function add() {
+	public function add_new() {
 		echo 1;
 	}
 

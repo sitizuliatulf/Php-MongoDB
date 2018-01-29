@@ -26,5 +26,7 @@ $lang['delete'] = 'Hapus';
 $lang['registerDate'] = 'Tanggal Pendaftaran';
 $lang['search'] = 'Pencarian';
 $lang['isDelete'] = 'Aktif';
+$lang['new_data'] = 'Data Baru';
+$lang['has_been_choose'] = 'Yang dipilih';
 
 ?>
