@@ -1,7 +1,7 @@
 <?php
 
 class Auth extends CI_Controller
-{
+{ 
 
 	public function __construct() {
 		parent::__construct();
@@ -9,9 +9,63 @@ class Auth extends CI_Controller
 	}
 
 	public function login()
+	
 	{
-		echo 'login page';
-	}
+			
+			$email = $this->input->post('email');
+			$pass = $this->input->post('password');
+			
+			$this->session->unset_userdata('user');
+			if (!empty($email) && !empty($pass))
+			{
+				$this->load->model('auth_model');
+				$where = array('email' => $email, 'password' => $pass);
+				$user = $this->auth_model->get_user('users', $where);
+				// $user => [{id: 1, name: semok}] kalau dia ketemu
+				// $user => []
+				// if (count($user))
+				if ($user['password'] == $pass)
+				{
+					$userdata = array(
+					'id' => $user['user_id'],
+					'name' => $user['username'],
+					'group' => $user['usergroup_id'],
+					'logged_in' => TRUE
+					);
+					$this->session->set_userdata
+					('user', base64_encode
+					(serialize($userdata))
+					);
+				} 
+				else 
+				{
+					 $msg = "Username and password didn't match,
+					        please try again";
+				}
+			} 
+			else 
+			{
+				$msg = "Username or password is empty, 
+						please try again";
+			}
+			$this->session->set_flashdata('err_login', $msg);
+			header("Location: $this->url");
+
+			$this->generate_view->view('login');
+		
+		}
+		
+		function out()
+		{
+			$this->session->sess_destroy();
+			header("Location: $this->url");
+		}
+
+	
+
+	
+	
+	
 
 	public function index()
 	{
