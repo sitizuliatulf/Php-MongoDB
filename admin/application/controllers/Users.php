@@ -32,13 +32,6 @@ class Users extends CI_Controller {
 		array_push($this->fields, $tmp);
 		unset($tmp);
 
-		$tmp = new stdClass();
-		$tmp->type = 'boolean';
-		$tmp->name = 'isDelete';
-		$tmp->button_style = 'danger';
-		array_push($this->fields, $tmp);
-		unset($tmp);
-
 	}
 
 	private function set_custom_action() {
@@ -73,7 +66,21 @@ class Users extends CI_Controller {
 	}
 
 	public function add_new() {
-		echo 1;
+		$this->generate_view->view('add_user');
+	}
+
+	public function delete($id = '') {
+		if (empty($id)) {
+			$delete_all = $this->input->post('delete_all');
+			if (is_array($delete_all) && count($delete_all) > 0) {
+				foreach ($delete_all as $v) {
+					$this->mongo_db->where(array('_id' => $v))->delete($this->collection);
+				}
+			}
+		} else {
+			$this->mongo_db->where(array('email' => $id))->delete($this->collection);
+		}
+		redirect(base_url($this->url));
 	}
 
 }
