@@ -22,7 +22,8 @@ class Auth extends CI_Controller {
 					'username' => $this->input->post('username'),
 					'isAdmin' => false,
 					'lastLogin' => '',
-					'registerDate' => date("Y-m-d h:i:sa")
+					'registerDate' => date("Y-m-d h:i:sa"),
+					'isDelete' => false
 				);
 				$this->auth_model->insert_data($data);
 				unset($data);
