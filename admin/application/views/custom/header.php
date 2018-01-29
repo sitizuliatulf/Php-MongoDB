@@ -55,8 +55,14 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-body">
-          <button class="btn btn-default">Tambah</button>
-          <button class="btn btn-danger">Hapus</button>
+          <div class="col-md-12 no-padding" style="margin: 10px 0px;">
+            <button class="btn btn-default">
+              <i class="fa fa-plus"></i> Data Baru
+            </button>
+            <button class="btn btn-danger">
+              <i class="fa fa-trash-o"></i> Yang Dipilih
+            </button>
+          </div>
           <table class="table table-bordered">
             <tbody>
               <tr>
@@ -83,6 +89,9 @@
                   count($data) > 0) {
                     foreach ($data as $d_k => $d_v) {
                 ?>
+                  <td>
+                      <input type="checkbox" name="delete[]" />
+                  </td>
                   <td><?php echo $d_k + 1 ?></td>
                       <?php
                         if (isset($this->fields) && 
@@ -103,7 +112,7 @@
                         count($this->custom_action) > 0) {
                           foreach ($this->custom_action as $k => $v) {
                       ?>     
-                          <a href="<?php echo base_url($v->function_name.'/'.$d_v['_id']->{'$id'}) ?>" class="btn btn-<?php echo $v->button_style ?>">
+                          <a href="<?php echo base_url($v->function_name.'/'.$d_v['_id']->{'$id'}) ?>" class="btn btn-sm btn-<?php echo $v->button_style ?>">
                             <i class="<?php echo $v->icon_name ?>"></i>
                             <?php echo ucfirst($v->name) ?>
                           </a>
