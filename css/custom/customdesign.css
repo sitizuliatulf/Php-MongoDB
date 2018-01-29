@@ -1,0 +1,18 @@
+.navbar{
+	position: relative;
+    min-height: 0px;
+    margin-bottom: 0px;
+}
+
+.container-fluid{
+	background-color: pink;
+}
+
+.navbar-nav{
+ background: pink;
+}
+
+.navbar-nav >li > a:hover {
+	 background-color: purple !important;
+	color:white !important;
+}
