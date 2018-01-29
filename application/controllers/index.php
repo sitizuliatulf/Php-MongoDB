@@ -9,20 +9,19 @@ class Index extends CI_Controller {
 	}
 	public function index()
 	{
-		
-		$data = $this->mongo_db->get('index');
-		//dibawah ini cara ngeload js dan cssnya
-		$options['css'] = ['./css/custom/custom.css'];
-		$this->generate_view->view('login', array('data' => $data), $options);
+		// $data = $this->mongo_db->get('mahasiswa');
+		// //dibawah ini cara ngeload js dan cssnya
+		// $options['css'] = ['./css/custom/custom.css'];
+		// $this->generate_view->view('index', array('data' => $data), $options);
+		echo 2;
 	}
-	public function registrasi($rara) 
-	{
+
+	public function registrasi($zuli) {
 		echo 1;
 		echo 2;
-		echo $rara;
+		echo $zuli;
 		die;
-
+		$this->generate_view->view('registrasi');
 	}
-
 }
 
