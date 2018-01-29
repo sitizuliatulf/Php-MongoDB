@@ -1,133 +1,59 @@
 <?php
 
-class Auth extends CI_Controller
-{ 
+class Auth extends CI_Controller {
+	public $collection;
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->library(array('mongo_db', 'generate_view'));
-
-<<<<<<< HEAD
+		$this->collection = 'users';
+		$this->load->model('auth_model');
+		$this->load->library('form_validation');
 	}
-=======
-	public function login()
-	
-	{
-			
-			$email = $this->input->post('email');
-			$pass = $this->input->post('password');
-			
-			$this->session->unset_userdata('user');
-			if (!empty($email) && !empty($pass))
-			{
-				$this->load->model('auth_model');
-				$where = array('email' => $email, 'password' => $pass);
-				$user = $this->auth_model->get_user('users', $where);
-				// $user => [{id: 1, name: semok}] kalau dia ketemu
-				// $user => []
-				// if (count($user))
-				if ($user['password'] == $pass)
-				{
-					$userdata = array(
-					'id' => $user['user_id'],
-					'name' => $user['username'],
-					'group' => $user['usergroup_id'],
-					'logged_in' => TRUE
-					);
-					$this->session->set_userdata
-					('user', base64_encode
-					(serialize($userdata))
-					);
-				} 
-				else 
-				{
-					 $msg = "Username and password didn't match,
-					        please try again";
-				}
-			} 
-			else 
-			{
-				$msg = "Username or password is empty, 
-						please try again";
-			}
-			$this->session->set_flashdata('err_login', $msg);
-			header("Location: $this->url");
 
-			$this->generate_view->view('login');
-		
-		}
-		
-		function out()
-		{
-			$this->session->sess_destroy();
-			header("Location: $this->url");
-		}
-
-	
-
-	
-	
-	
->>>>>>> origin/master
-
-
-	public function register()
-	{
-
-
-		if (isset($_POST['register']))
-		{
-			// refrensi bisa baca di https://www.codeigniter.com/userguide3/libraries/form_validation.html
-
-			$this->form_validation->set_rules('username', 'Username wajib di isi', 'required');
-			$this->form_validation->set_rules(
-				'email', null, 'required|valid_email', 
-				array(
-					'required' => 'Email wajib diisi',
-					'valid_email' => 'Format email tidak sesuai'
-				)
-			);
-			$this->form_validation->set_rules('password', 'Kata sandi tidak sesuai', 'required|callback_match_password_with_conf');
-
-			
-			
-			
-
-			//jika form validation true
+	public function register() {
+		if (isset($_POST['register'])) {
+			$this->form_validation->set_rules('username', 'Username', 'required');
+			$this->form_validation->set_rules('email', 'email', 'required|callback_email_already_exist');
+			$this->form_validation->set_rules('password', 'Kata sand', 'required|callback_match_password_with_conf');
 			if ($this->form_validation->run() == TRUE) {
-			echo 'register berhasil';
-			
-
-			$email = $this->input->post('email');
-			$password = $this->input->post('password');
-			if ($email && $password) {
-				$where = array (
-					'email' => $email,
-					'password' => sha1($password),
-					'isAdmin' => false
-
+				$data = array(
+					'email' => $this->input->post('email'),
+					'password' => $this->input->post('password'),
+					'username' => $this->input->post('username'),
+					'isAdmin' => false,
+					'lastLogin' => '',
+					'registerDate' => date("Y-m-d h:i:sa")
 				);
-
-			$data = $this->mongo_db->get_where('users',array('email==>$email'));
-			if (count($data) > 0){
-				//sudah terdaftar
-				redirect(base_url('dashboard'));
+				$this->auth_model->insert_data($data);
+				unset($data);
+				redirect(base_url());
+			} else {
+				redirect(base_url('auth/register'));
 			}
-			}
-
-			
+		} else {
+			$this->generate_view->view('register');
 		}
-		//load view ke register
-		$this->generate_view->view('register');
 	}
 
-}
-	public function match_password_with_conf($password) {
-		if ($this->input->post('confirmation_password') === $password) {
+	public function email_already_exist($email) {
+		$where = array('email' => $email);
+		$email_exist = $this->auth_model->get_user($where);
+		unset($where);
+		if (count($email_exist) > 0) {
+			$this->form_validation->set_message('email_already_exist', 'Email sudah terdaftar');
+			return false;
+		} else {
 			return true;
 		}
-		$this->form_validation->set_message('match_password_with_conf', 'Kata sandi dan konfirmasi kata sandi tidak sesuai');
-		return false;
+	}
+
+    public function match_password_with_conf($password) {
+		if ($this->input->post('confirmation_password') != $password) {
+			$this->form_validation->set_message('match_password_with_conf', 'Kata sandi dan konfirmasi kata sandi tidak sesuai');
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 }

@@ -1,7 +1,9 @@
 <div class="col-lg-5 col-lg-offset-2">
   <?php
-    // check terlebih dahulu ada error atau tidak jika ada maka munculkan 
-    if (validation_errors()) {
+    // check terlebih dahulu ada error atau tidak jika ada maka munculkan
+    echo validation_errors(); 
+    die;
+    if (!empty(validation_errors())) {
   ?>
       <div class="alert alert-danger"><h4>Gagal !</h4><?php echo validation_errors() ?></div>
   <?php 
