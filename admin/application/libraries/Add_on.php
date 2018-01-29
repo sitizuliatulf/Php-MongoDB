@@ -53,7 +53,7 @@ class Add_on {
         $tmp_user = array(
             'username' => "Azhar Prabudi",
             'email' => "azharprabui@gmail.com",
-            'password' => "faeb3229713fde804c98e9818ad921aa4cc51002",
+            'password' => "f7c3bc1d808e04732adf679965ccc34ca7ae3441",
             'isAdmin' => true,
             'lastLoggin' => '',
             'isDelete' => false,

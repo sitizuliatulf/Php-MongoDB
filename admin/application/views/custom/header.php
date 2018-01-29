@@ -54,17 +54,27 @@
     </div>
     <div class="col-xs-12">
       <div class="box">
-        <!-- /.box-header -->
         <div class="box-body">
+          <div class="col-md-12 no-padding" style="margin: 10px 0px;">
+            <button class="btn btn-default">
+              <i class="fa fa-plus"></i> Data Baru
+            </button>
+            <button class="btn btn-danger">
+              <i class="fa fa-trash-o"></i> Yang Dipilih
+            </button>
+          </div>
           <table class="table table-bordered">
             <tbody>
               <tr>
                 <th><?php echo $this->lang->line('no.') ?></th>
-                <?php 
-                  if (isset($column)) {
-                    foreach ($column as $column_key => $column_value) {
+                <?php
+                  // munculkan nama kolomnya
+                  if (isset($this->fields) && 
+                  is_array($this->fields) && 
+                  count($this->fields) > 0) {
+                    foreach ($this->fields as $f_k => $f_v) {
                 ?>
-                  <th><?php echo $this->lang->line($column_value['name']) ?></th>
+                  <th><?php echo $this->lang->line($f_v->name) ?></th>
                 <?php
                     }
                   }
@@ -73,30 +83,39 @@
               </tr>
               <tr>
                 <?php
-                  if (isset($data['data']) &&
-                  count($data['data']) > 0) {
-                    foreach ($data['data'] as $data_key => $data_value) {
+                  //munculkan data di tabel
+                  if (isset($data) &&
+                  is_array($data) &&
+                  count($data) > 0) {
+                    foreach ($data as $d_k => $d_v) {
                 ?>
-                  <td><?php echo $data_key + 1 ?></td>
+                  <td>
+                      <input type="checkbox" name="delete[]" />
+                  </td>
+                  <td><?php echo $d_k + 1 ?></td>
                       <?php
-                        if (isset($column)) {
-                          foreach ($column as $column_key => $column_value) {
+                        if (isset($this->fields) && 
+                        is_array($this->fields) && 
+                        count($this->fields) > 0) {
+                          foreach ($this->fields as $f_k => $f_v) {
                       ?>
-                          <td><?php echo $data_value[$column_value['name']] ?></td>
+                          <td><?php echo $d_v[$f_v->name] ?></td>
                       <?php
                           }  
                         }
                       ?>
                       <td class="text-center">
                       <?php
-                        if (isset($custom_action) && 
-                        count($custom_action) > 0) {
-                          foreach ($custom_action as $k => $v) {
+                        //munculkan button action di tabel header
+                        if (isset($this->custom_action) &&
+                        is_array($this->custom_action) &&
+                        count($this->custom_action) > 0) {
+                          foreach ($this->custom_action as $k => $v) {
                       ?>     
-                              <a href="<?php echo base_url($v->link.'/'.$data_value['_id']->{'$id'}) ?>" class="btn btn-<?php echo $v->button_style ?>">
-                                <i class="fa fa-<?php echo $v->icon_name ?>"></i>
-                                <?php echo ucfirst($v->name) ?>
-                              </a>
+                          <a href="<?php echo base_url($v->function_name.'/'.$d_v['_id']->{'$id'}) ?>" class="btn btn-sm btn-<?php echo $v->button_style ?>">
+                            <i class="<?php echo $v->icon_name ?>"></i>
+                            <?php echo ucfirst($v->name) ?>
+                          </a>
                       <?php  
                           }
                         }
@@ -111,13 +130,17 @@
           </table>
         </div>
         <div class="box-footer clearfix">
-          <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
-          </ul>
+          <div class="col-md-6 text-left">
+            <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
+              <?php
+              $offset = empty($this->uri->segment(3)) ? 0 : $this->uri->segment(3);
+              echo 'Tampilkan data dari '.$offset.' sampai '.($this->limit + $offset);
+              ?>
+            </div>
+          </div>
+          <div class="col-md-6 text-right">
+            <?php echo $this->pagination->create_links() ?>
+          </div>
         </div>
       </div>
     </div>
