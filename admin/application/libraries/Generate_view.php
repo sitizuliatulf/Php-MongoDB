@@ -14,7 +14,11 @@ class Generate_view {
 		$this->CI->mongo_db->limit(10);
 		$this->CI->mongo_db->offset($offset);
 		if (count($fields) > 0) {
-			$this->CI->mongo_db->select($fields);
+			$tmp_fields = [];
+			foreach($fields as $value) {
+				array_push($tmp_fields, $value['name']);
+			};
+			$this->CI->mongo_db->select($tmp_fields);
 		}
 		if (count($order_by) > 0) {
 			$this->CI->mongo_db->order_by($order_by);
@@ -53,38 +57,49 @@ class Generate_view {
 		}
 	}
 
-	public function generate_table($data, $column=[], $custom_action=[]) {
-		/* 
-		action value = ['edit', 'delete']
-		jika kosong maka kedua button tersebut tidak ditampilkan
-		*/
-		$this->CI->load->view('base/header', array('css' => $this->CI->config->config['css']));
-		$this->CI->load->view('base/aside');
-		// data dibawah ini digunakan untuk mengkostumisasi table
-		if (count($custom_action) < 1) {
-			// edit
-			$tmp = new stdClass();
-			$tmp->name = $this->CI->lang->line('edit');
-			$tmp->link = 'edit';
-			$tmp->button_style = 'warning';
-			array_push($custom_action, $tmp);
-			unset ($tmp);
-
-			// delete
-			$tmp = new stdClass();
-			$tmp->name = $this->CI->lang->line('delete');
-			$tmp->link = 'delete';
-			$tmp->button_style = 'danger';
-			array_push($custom_action, $tmp);
-			unset ($tmp);
+	public function generate_header($offset) {
+		$data = array();
+		$this->CI->mongo_db->limit($this->CI->limit);
+		$this->CI->mongo_db->offset($offset);
+		if (count($this->CI->fields) > 0) {
+			$fields = [];
+			foreach($this->CI->fields as $f) {
+				array_push($fields, $f->name);
+			};
+			$this->CI->mongo_db->select($fields);
+			unset($fields);
 		}
-		$data = array(
-			'data' => $data, 
-			'column' => $column, 
-			'custom_action' => $custom_action,
-		);
-		$this->CI->load->view('custom/table', $data);
-		$this->CI->load->view('base/footer', array('js' => $this->CI->config->config['js']));
+		if (count($this->CI->default_order_by) > 0) {
+			$this->CI->mongo_db->order_by($this->CI->default_order_by);
+		}
+		$data['data'] = $this->CI->mongo_db->get($this->CI->collection);
+		$this->set_pagination();
+		$this->view('custom/header', $data);
+	}
+	
+	private function set_pagination() {
+		// set pagination di tabel ehader
+		$config['base_url'] = base_url().$this->CI->url.'/view';
+		$config['total_rows'] = 100;
+		$config['per_page'] = $this->CI->limit;
+		$config['uri_segment'] = 3;
+
+		$config['first_link'] = '';
+		$config['last_link'] = '';
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['next_link'] = 'Selanjutnya';
+		$config['next_tag_open'] = '<li class="paginate_button next">';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_link'] = 'Sebelumnya';
+		$config['prev_tag_open'] = '<li class="paginate_button previous disabled" id="example2_previous">';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="paginate_button active"><a href="javascript:void(0)">';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li class="paginate_button ">';
+		$config['num_tag_close'] = '</li>';
+		
+		$this->CI->pagination->initialize($config);		
 	}
 
 }

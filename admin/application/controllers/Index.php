@@ -12,8 +12,8 @@ class Index extends CI_Controller {
 	}
 	public function index() {
 		$options['css'] = [
-				'./css/custom/login.css'
-			];
+			'./css/custom/login.css'
+		];
 		if ($this->add_on->initial_project()) {
 			if (!$this->add_on->user_is_login(true)) {
 				$this->generate_view->view('login', null, $options);
@@ -29,12 +29,14 @@ class Index extends CI_Controller {
 			$where = array (
 				'email' => $email,
 				'password' => sha1($password),
-				'isDelete' => false
+				'isDelete' => false,
+				'isAdmin' => true
 			);
 			$data = $this->mongo_db->get_where($this->collection, $where);
 			if (count($data) > 0) {
 				//ubah dari array ke object
 				$session_user_login = json_decode(json_encode(array_shift($data)), FALSE);
+				unset($session_user_login->password);
 				$this->session->set_userdata('session_user_login', $session_user_login);
 				redirect(base_url('dashboard'));
 			}
