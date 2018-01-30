@@ -8,13 +8,19 @@ class Auth extends CI_Controller {
 		$this->collection = 'users';
 		$this->load->model('auth_model');
 		$this->load->library('form_validation');
+		
 	}
 
-	public function register() {
-		if (isset($_POST['register'])) {
-			$this->form_validation->set_rules('username', 'Username', 'required');
+	public function register() 
+	{
+
+		if (isset($_POST['register'])) 
+		{
+			$this->form_validation->set_rules('username', 'Username wajib di isi', 'required');
 			$this->form_validation->set_rules('email', 'email', 'required|callback_email_already_exist');
-			$this->form_validation->set_rules('password', 'Kata sand', 'required|callback_match_password_with_conf');
+			$this->form_validation->set_rules('password', 'Kata sandi tidak sesuai','required|callback_match_password_with_conf');
+
+
 			if ($this->form_validation->run() == TRUE) {
 				$data = array(
 					'email' => $this->input->post('email'),
@@ -29,7 +35,7 @@ class Auth extends CI_Controller {
 				unset($data);
 				redirect(base_url());
 			} else {
-				redirect(base_url('auth/register'));
+				$this->generate_view->view('register');
 			}
 		} else {
 			$this->generate_view->view('register');
