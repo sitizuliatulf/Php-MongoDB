@@ -27,14 +27,11 @@
           </div>
           <div class="col-md-12">
             <div class="row">
-              <div class="col-md-offset-1 col-md-3" style="background-color: green;padding: 10">
-                &nbsp;
+              <div class="col-md-offset-1 col-md-3">
               </div>
-              <div class="col-md-offset-1 col-md-3" style="background-color: green;padding: 10">
-                &nbsp;
+              <div class="col-md-offset-1 col-md-3">
               </div>
-              <div class="col-md-offset-1 col-md-3" style="background-color: green;padding: 10">
-                &nbsp;
+              <div class="col-md-offset-1 col-md-3">
               </div>
             </div>
           </div>
@@ -54,14 +51,49 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-      <div class="col-md-8 col-xs-8" style="height:2px;background-color: white">
-            <div class="row pictlist" >
-              <div class="col-md-6">
-                <img src="https://www.edumor.com/uploads/instance/575187e1b3fe3/pic_bilding.jpg" style="width:100%;" alt="naruto" >
+        <div class="col-md-12 col-xs-12" style="height:2px;background-color: black">
+          <div class="row beritalist" >
+            <div class="col-md-3">
+              <img src="https://www.edumor.com/uploads/instance/575187e1b3fe3/pic_bilding.jpg" style="width:100%;" alt="esaunggul" >
+            </div>
+            <div class="col-md-3">
+              <div>
+                <a href="#"> <h4 style="margin: 0px !important">Esa Unggul</a></h4>
               </div>
-              <div class="col-md-6">
+              <div>
+                <p style="margin: 0px !important; font-size: 12px;">esa unggul adalah .................</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+                <img src="https://www.edumor.com/uploads/instance/575187e1b3fe3/pic_bilding.jpg" style="width:100%;" alt="esaunggul" >
+              </div>
+              <div class="col-md-3">
                 <div>
-                  <h4 style="margin: 0px !important">Esa Unggul</h4>
+                  <a href="#"> <h4 style="margin: 0px !important">Esa Unggul</a></h4>
+                </div>
+                <div>
+                  <p style="margin: 0px !important; font-size: 12px;">esa unggul adalah .................</p>
+                </div>
+              </div>
+            </div>
+            <div class="row beritalist" >
+            <div class="col-md-3">
+              <img src="https://www.edumor.com/uploads/instance/575187e1b3fe3/pic_bilding.jpg" style="width:100%;" alt="esaunggul" >
+            </div>
+            <div class="col-md-3">
+              <div>
+                <a href="#"> <h4 style="margin: 0px !important">Esa Unggul</a></h4>
+              </div>
+              <div>
+                <p style="margin: 0px !important; font-size: 12px;">esa unggul adalah .................</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+                <img src="https://www.edumor.com/uploads/instance/575187e1b3fe3/pic_bilding.jpg" style="width:100%;" alt="esaunggul" >
+              </div>
+              <div class="col-md-3">
+                <div>
+                  <a href="#"> <h4 style="margin: 0px !important">Esa Unggul</a></h4>
                 </div>
                 <div>
                   <p style="margin: 0px !important; font-size: 12px;">esa unggul adalah .................</p>
