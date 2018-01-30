@@ -16,8 +16,9 @@ class Design extends CI_Controller {
 	}
 	public function design_layout() 
 	{
-		$options['css'] = ['./css/custom/customdesign.css'];
-		$this->generate_view->view('design_layout',$options);
+		$options['css'] = ['./css/custom/design.css'];
+		// parameter pertama nama view, parameter kedua data, parameter ketiga css
+		$this->generate_view->view('design_layout', null, $options);
 
 	}
 }
