@@ -79,7 +79,13 @@ $session_user_login = $this->session->userdata('session_user_login');
     </aside>
     <div class="content-wrapper">
         <section class="content-header">
-        <h1>
-            <?php echo 'Data '.ucFirst($this->lang->line($this->uri->segment(1))) ?>
+        <h1 class="title-header">
+            <?php 
+            $title = $this->uri->segment(1);
+            if (!empty($this->uri->segment(2))) {
+                $title = $this->uri->segment(2);
+            }
+            echo ucFirst($this->lang->line($title)); 
+            ?>
         </h1>
         </section>

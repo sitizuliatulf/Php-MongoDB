@@ -28,5 +28,10 @@ $lang['search'] = 'Pencarian';
 $lang['isDelete'] = 'Aktif';
 $lang['new_data'] = 'Data Baru';
 $lang['has_been_choose'] = 'Yang dipilih';
+$lang['add_new'] = 'Tambah Baru';
+$lang['back'] = 'Kembali';
+$lang['save'] = 'Simpan';
+$lang['yes'] = 'Ya';
+$lang['no'] = 'Tidak';
 
 ?>

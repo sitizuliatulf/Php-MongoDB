@@ -11,6 +11,7 @@ $config['css'] = [
     './css/bootstrap-daterangepicker/daterangepicker.css',
     './css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css',
     './css/icheck/all.css',
+    './css/custom/global.css'
 ];
 
 $config['js'] = [

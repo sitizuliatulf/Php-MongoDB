@@ -9,9 +9,12 @@ class Users extends CI_Controller {
 	public $default_order_by = array('username' => 'ASC');
 	public $custom_action = array();
 	public $url = '';
+	private $model;
 
 	public function __construct() {
 		parent::__construct();
+		$this->load->model('user_model');
+		$this->model = $this->user_model;
 		$this->url = $this->router->fetch_class();
 		$this->set_header();
 		$this->set_custom_action();
@@ -66,19 +69,88 @@ class Users extends CI_Controller {
 	}
 
 	public function add_new() {
-		$this->generate_view->view('add_user');
+		if (isset($_POST['submit'])) {
+			$this->do_add_new();
+		} else {
+			$this->session->unset_userdata('EDIT_USER');
+			$data['is_admin_model'] = $this->model->data_is_admin();
+			$this->generate_view->view('pages/add_new_user', $data);
+		}
+	}
+
+	public function edit($id) {
+		if (isset($_POST['submit'])) {
+			$this->do_edit();
+		} else {
+			$where['_id'] = new MongoId($id);
+			$user = $this->model->get_data_where($where);
+			unset($where);
+			if (is_array($user) && count($user) > 0) {
+				$this->session->set_userdata('EDIT_USER', $user);
+				$data['is_admin_model'] = $this->model->data_is_admin();
+				$this->generate_view->view('pages/add_new_user', $data);
+			} else {
+				redirect(base_url());
+			}
+		}
+	}
+
+	private function do_add_new() {
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback_email_already_exist');
+		$this->form_validation->set_rules('password', 'Kata Sandi', 'required|callback_match_pass');
+		$this->form_validation->set_rules('is_admin', 'Akses Admin', 'required');
+		if ($this->form_validation->run()) {
+			$data = array(
+				'username' => $this->input->post('username'),
+				'email' => $this->input->post('email'),
+				'isAdmin' => $this->input->post('is_admin'),
+				'password' => sha1($this->input->post('password')),
+				'lastLogin' => '',
+				'registerDate' => date("Y-m-d h:i:sa"),
+				'isDelete' => false
+			);
+			$this->model->add_new_data($data);
+			redirect(base_url($this->url));
+		} else {
+			redirect(base_url($this->url).'/add_new');
+		}
+	}
+
+	public function email_already_exist($email) {
+		$where['email'] = $email;
+		$is_exist = $this->model->get_data_where($where);
+		if (is_array($is_exist) && count($is_exist) > 0) {
+			$this->form_validation->set_message('callback_email_already_exist', 'Email sudah terdaftar');
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public function match_pass($password) {
+		if ($password == $this->input->post('confirmation_password')) {
+			return true;
+		} else {
+			$this->form_validation->set_message('callback_email_already_exist', 'Kata sandi tidak sesuai');
+			return false;
+		}
+	}
+
+	private function do_edit() {
+
 	}
 
 	public function delete($id = '') {
 		if (empty($id)) {
 			$delete_all = $this->input->post('delete_all');
 			if (is_array($delete_all) && count($delete_all) > 0) {
-				foreach ($delete_all as $v) {
-					$this->mongo_db->where(array('_id' => $v))->delete($this->collection);
-				}
+				$this->model->remove_batch_user($delete_all, '_id');
 			}
 		} else {
-			$this->mongo_db->where(array('email' => $id))->delete($this->collection);
+			$where['_id'] = new MongoId($v);
+			$this->mongo_db->where($where)->delete($this->collection);
+			unset($where);
 		}
 		redirect(base_url($this->url));
 	}
