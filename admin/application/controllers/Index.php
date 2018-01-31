@@ -21,7 +21,7 @@ class Index extends CI_Controller {
 			if (!$this->add_on->user_is_login(true)) {
 				$this->generate_view->view('login', null, $options);
 			} else {
-				redirect(base_url('dashboard'));
+				redirect(base_url('articles'));
 			}
 		}
 	}

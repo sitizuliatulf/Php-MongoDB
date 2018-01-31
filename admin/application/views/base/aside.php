@@ -24,9 +24,6 @@ $session_user_login = $this->session->userdata('session_user_login');
                                     <small><?php echo $session_user_login->email ?></small>
                                 </p>
                             </li>
-                            <li class="user-body">
-                                <small>Member since Nov. 2012</small>
-                            </li>
                             <li class="user-footer">
                             <div class="pull-left">
                                 <a href="#" class="btn btn-default btn-flat"><?php echo $this->lang->line('profile')?></a>
@@ -46,32 +43,15 @@ $session_user_login = $this->session->userdata('session_user_login');
         <section class="sidebar">
             <ul class="sidebar-menu" data-widget="tree">
             <li class="header"><?php echo $this->lang->line('main_menu') ?></li>
-            <li class="active">
-                <a href="#">
-                    <i class="fa fa-dashboard"></i> <span><?php echo $this->lang->line('halaman_utama') ?></span>
-                </a>
-            </li>
             <li>
                 <a href="<?php echo base_url('users') ?>">
                 <i class="fa fa-user"></i> <span><?php echo $this->lang->line('users') ?></span>
                 </a>
             </li>
-            <li class="treeview">
-                <a href="#">
-                <i class="fa fa-files-o"></i>
-                <span><?php echo $this->lang->line('articles') ?></span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
+            <li>
+                <a href="<?php echo base_url('articles') ?>">
+                <i class="fa  fa-newspaper-o"></i> <span><?php echo $this->lang->line('articles') ?></span>
                 </a>
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="pages/layout/top-nav.html">
-                            <i class="fa fa-circle-o"></i><?php echo $this->lang->line('article_categories') ?>
-                        </a>
-                    </li>
-                    <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> <?php echo $this->lang->line('list_articles') ?></a></li>
-                </ul>
             </li>
             <li class="header"><?php echo $this->lang->line('pengaturan') ?></li>
             <li><a href="javascript:void(0)" class="btn-logout"><i class="fa fa-sign-out"></i> <span><?php echo $this->lang->line('signout') ?></span></a></li>

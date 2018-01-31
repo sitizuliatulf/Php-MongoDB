@@ -122,7 +122,7 @@ class Users extends CI_Controller {
 				'password' => $this->input->post('password'),
 				'confirmation_password' => $this->input->post('confirmation_password'),
 			);
-			$this->session->set_userdata($session_add_new);
+			$this->session->set_userdata('ADD_USER', $session_add_new);
 			unset($session_add_new);
 			$data['is_admin_model'] = $this->model->data_is_admin();
 			$this->add_on->set_error_message(validation_errors(), 'danger');
