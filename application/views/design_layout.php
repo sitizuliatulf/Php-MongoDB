@@ -38,13 +38,15 @@
                 </div>
                 <div class="col-md-6">
                   <div>
-                    <a href="#"> <h3 style="margin: 0px !important">Esa Unggul</a></h3>
+                    <a href="#"> <h3 style="margin: 0px !important"><strong>Esa Unggul</strong></h3></a>
                   </div>
-                  <div>
-                    <p style="margin: 0px !important; font-size: 12px;">Jakarta, 30 Januari 2018</p>
+                  <div class="date">
+                    Rabu, 31 Januari 2018 - 08.49 WIB |
+                    <strong>Admin</strong>
                   </div>
+                  <br>
                   <div>
-                    <p style="margin: 0px !important; font-size: 12px;">esa unggul adalah kampus swasta yang memiliki 3 cabang, yaitu Kebon Jeruk, Citra Raya, dan Bekasi</p>
+                    <p style="margin: 0px !important; font-size: 12px;">Esa Unggul adalah kampus swasta yang memiliki 3 cabang, yaitu Kebon Jeruk, Citra Raya, dan Bekasi</p>
                   </div>
                 </div>
               </div>
@@ -58,13 +60,15 @@
                 </div>
                 <div class="col-md-6">
                   <div>
-                    <a href="#"> <h3 style="margin: 0px !important">Esa Unggul</a></h3>
+                    <a href="#"> <h3 style="margin: 0px !important"><strong>Esa Unggul</strong></h3></a>
                   </div>
-                  <div>
-                    <p style="margin: 0px !important; font-size: 12px;">Jakarta, 30 Januari 2018</p>
+                  <div class="date">
+                    Rabu, 31 Januari 2018 - 08.49 WIB |
+                    <strong>Admin</strong>
                   </div>
+                  <br>
                   <div>
-                    <p style="margin: 0px !important; font-size: 12px;">esa unggul adalah kampus swasta yang memiliki 3 cabang, yaitu Kebon Jeruk, Citra Raya, dan Bekasi</p>
+                    <p style="margin: 0px !important; font-size: 12px;">Esa Unggul adalah kampus swasta yang memiliki 3 cabang, yaitu Kebon Jeruk, Citra Raya, dan Bekasi</p>
                   </div>
                 </div>  
               </div>
@@ -78,13 +82,15 @@
                 </div>
                 <div class="col-md-6">
                   <div>
-                    <a href="#"> <h3 style="margin: 0px !important">Esa Unggul</a></h3>
+                    <a href="#"> <h3 style="margin: 0px !important"><strong>Esa Unggul</strong></h3></a>
                   </div>
-                  <div>
-                    <p style="margin: 0px !important; font-size: 12px;">Jakarta, 30 Januari 2018</p>
+                  <div class="date">
+                    Rabu, 31 Januari 2018 - 08.49 WIB |
+                    <strong>Admin</strong>
                   </div>
+                  <br>
                   <div>
-                    <p style="margin: 0px !important; font-size: 12px;">esa unggul adalah kampus swasta yang memiliki 3 cabang, yaitu Kebon Jeruk, Citra Raya, dan Bekasi</p>
+                    <p style="margin: 0px !important; font-size: 12px;">Esa unggul adalah kampus swasta yang memiliki 3 cabang, yaitu Kebon Jeruk, Citra Raya, dan Bekasi</p>
                   </div>
                 </div>  
               </div>

@@ -23,3 +23,19 @@ body{
 	margin-top: 10px !important;
 	background-color: white;
 }
+
+.isi_berita{
+	font-size: 16px;
+	padding: 20px 50px;
+}
+
+.teks{
+	margin: 0px !important;
+	margin-top: 30px !important;
+	background-color: white;
+	border-top: 8px solid blue;
+}
+
+.komentar{
+	padding: 0px 30px;
+}
