@@ -10,6 +10,10 @@ class User_model extends CI_Model {
         return $this->mongo_db->insert($this->collection, $data);
     }
 
+    public function update_user($data, $where) {
+        return $this->mongo_db->where($where)->set($data)->update($this->collection);
+    }
+
     public function data_is_admin() {
         $data = array();
         

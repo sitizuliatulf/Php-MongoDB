@@ -12,8 +12,7 @@ class Add_on {
         if (is_object($session_user_login)) {
             if ($isBackend) {
                 if ($session_user_login->_id->{'$id'} !== '' && 
-                $session_user_login->isAdmin === true && 
-                $session_user_login->isDelete === false) {
+                $session_user_login->isAdmin === "1") {
                     return true;
                 }
                 return false;
@@ -54,9 +53,8 @@ class Add_on {
             'username' => "Azhar Prabudi",
             'email' => "azharprabui@gmail.com",
             'password' => "f7c3bc1d808e04732adf679965ccc34ca7ae3441",
-            'isAdmin' => true,
+            'isAdmin' => 1,
             'lastLoggin' => '',
-            'isDelete' => false,
             'registerDate' => date("Y-m-d h:i:sa") // berikan waktu saat ini
         );
         $this->CI->mongo_db->insert('users', $tmp_user);

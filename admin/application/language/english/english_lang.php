@@ -33,5 +33,7 @@ $lang['back'] = 'Kembali';
 $lang['save'] = 'Simpan';
 $lang['yes'] = 'Ya';
 $lang['no'] = 'Tidak';
+$lang['success_add'] = 'Menambahkan data baru';
+$lang['success_edit'] = 'Mengubah data ';
 
 ?>

@@ -80,7 +80,7 @@ class Generate_view {
 	private function set_pagination() {
 		// set pagination di tabel ehader
 		$config['base_url'] = base_url().$this->CI->url.'/view';
-		$config['total_rows'] = 100;
+		$config['total_rows'] = $this->CI->mongo_db->count($this->CI->collection);
 		$config['per_page'] = $this->CI->limit;
 		$config['uri_segment'] = 3;
 

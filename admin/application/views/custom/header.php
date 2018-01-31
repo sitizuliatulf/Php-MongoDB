@@ -53,6 +53,7 @@
         </div>
     </div>
     <div class="col-xs-12">
+      <?php echo $this->session->flashdata('error_message') ?>
       <div class="box">
         <form action="<?php echo base_url().$this->url.'/delete' ?>" method="post">
         <div class="box-body">

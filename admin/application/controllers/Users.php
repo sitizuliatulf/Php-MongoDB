@@ -73,6 +73,7 @@ class Users extends CI_Controller {
 			$this->do_add_new();
 		} else {
 			$this->session->unset_userdata('EDIT_USER');
+			$this->session->unset_userdata('ADD_USER');
 			$data['is_admin_model'] = $this->model->data_is_admin();
 			$this->generate_view->view('pages/add_new_user', $data);
 		}
@@ -80,7 +81,7 @@ class Users extends CI_Controller {
 
 	public function edit($id) {
 		if (isset($_POST['submit'])) {
-			$this->do_edit();
+			$this->do_edit($id);
 		} else {
 			$where['_id'] = new MongoId($id);
 			$user = $this->model->get_data_where($where);
@@ -96,11 +97,11 @@ class Users extends CI_Controller {
 	}
 
 	private function do_add_new() {
-		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('username', 'username', 'required');
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback_email_already_exist');
 		$this->form_validation->set_rules('password', 'Kata Sandi', 'required|callback_match_pass');
 		$this->form_validation->set_rules('is_admin', 'Akses Admin', 'required');
-		if ($this->form_validation->run()) {
+		if ($this->form_validation->run() === true) {
 			$data = array(
 				'username' => $this->input->post('username'),
 				'email' => $this->input->post('email'),
@@ -108,12 +109,24 @@ class Users extends CI_Controller {
 				'password' => sha1($this->input->post('password')),
 				'lastLogin' => '',
 				'registerDate' => date("Y-m-d h:i:sa"),
-				'isDelete' => false
 			);
 			$this->model->add_new_data($data);
+			unset($data);
+			$this->add_on->set_error_message($this->lang->line('success_add'), 'success');
 			redirect(base_url($this->url));
 		} else {
-			redirect(base_url($this->url).'/add_new');
+			$session_add_new = array(
+				'username' => $this->input->post('username'),
+				'email' => $this->input->post('email'),
+				'is_admin' => $this->input->post('is_admin'),
+				'password' => $this->input->post('password'),
+				'confirmation_password' => $this->input->post('confirmation_password'),
+			);
+			$this->session->set_userdata($session_add_new);
+			unset($session_add_new);
+			$data['is_admin_model'] = $this->model->data_is_admin();
+			$this->add_on->set_error_message(validation_errors(), 'danger');
+			$this->generate_view->view('pages/add_new_user', $data);
 		}
 	}
 
@@ -137,8 +150,25 @@ class Users extends CI_Controller {
 		}
 	}
 
-	private function do_edit() {
-
+	private function do_edit($id) {
+		$this->form_validation->set_rules('username', 'username', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('is_admin', 'Akses Admin', 'required');
+		if ($this->form_validation->run() === true) {
+			$data = array(
+				'username' => $this->input->post('username'),
+				'email' => $this->input->post('email'),
+				'isAdmin' => $this->input->post('is_admin')
+			);
+			$where['_id'] = new MongoId($id);
+			$this->model->update_user($data, $where);
+			unset($data, $where);
+			$this->add_on->set_error_message($this->lang->line('success_edit'), 'success');
+			redirect(base_url($this->url));
+		} else {
+			unset($_POST['submit']);
+			$this->edit($id);
+		}
 	}
 
 	public function delete($id = '') {

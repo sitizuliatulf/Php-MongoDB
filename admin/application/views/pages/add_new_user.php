@@ -1,20 +1,32 @@
 <?php 
 $default_value = new stdClass();
+$readonly = new stdClass();
 $default_value->username = '';
 $default_value->email = '';
 $default_value->access_admin = '';
 $default_value->password = '';
+$default_value->confirmation_password = '';
+$readonly->email = '';
 if (is_array($this->session->userdata('EDIT_USER'))) {
     $user = $this->session->userdata('EDIT_USER')[0];
     $default_value->username = $user['username'];
     $default_value->email = $user['email'];
     $default_value->is_admin = $user['isAdmin'];
-    $default_value->password = ''; 
+    $readonly->email = 'readonly="readonly"'; 
+} else if (is_array($this->session->userdata('ADD_USER'))) {
+    $user = $this->session->userdata('ADD_USER')[0];
+    $default_value->username = $user['username'];
+    $default_value->email = $user['email'];
+    $default_value->is_admin = $user['is_admin'];
+    $default_value->password = $user['password'];
+    $default_value->confirmation_password = $user['confirmation_password'];
 }
 ?>
 <div class="col-xs-12 col-md-12">
     <?php 
-        echo validation_errors();
+    if (!empty($this->session->flashdata('error_message'))) {  
+        echo $this->session->flashdata('error_message');
+    }
     ?>
     <div class="box">
         <form action="" method="post">
@@ -27,7 +39,7 @@ if (is_array($this->session->userdata('EDIT_USER'))) {
                     </div>
                     <div class="form-group">
                         <label>Email <span class="asterik-red">*</span></label>
-                        <input type="text" name="email" class="form-control" value="<?php echo $default_value->email ?>" />
+                        <input type="text" name="email" class="form-control" value="<?php echo $default_value->email ?>" <?php echo $readonly->email ?> />
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -49,14 +61,20 @@ if (is_array($this->session->userdata('EDIT_USER'))) {
                             ?>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Kata Sandi <span class="asterik-red">*</span></label>
-                        <input type="password" name="password" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label>Konfirmasi Kata Sandi <span class="asterik-red">*</span></label>
-                        <input type="password" name="confirmation_password" class="form-control" />
-                    </div>
+                    <?php 
+                    if (!is_array($this->session->userdata('EDIT_USER'))) {
+                    ?>
+                        <div class="form-group">
+                            <label>Kata Sandi <span class="asterik-red">*</span></label>
+                            <input type="password" name="password" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>Konfirmasi Kata Sandi <span class="asterik-red">*</span></label>
+                            <input type="password" name="confirmation_password" class="form-control" />
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -69,7 +87,7 @@ if (is_array($this->session->userdata('EDIT_USER'))) {
                         <i class="fa fa-save"></i>
                         <?php echo $this->lang->line('save') ?>
                     </button>
-                    <a href="javascript:window.history.back()" class="btn btn-default"> 
+                    <a href="<?php echo base_url($this->url) ?>" class="btn btn-default"> 
                         <i class="fa fa-close"></i>
                         <?php echo $this->lang->line('back') ?>
                     </a>
