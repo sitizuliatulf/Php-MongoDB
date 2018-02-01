@@ -179,7 +179,7 @@ class Users extends CI_Controller {
 			}
 		} else {
 			$where['_id'] = new MongoId($v);
-			$this->mongo_db->where($where)->delete($this->collection);
+			$this->model->remove($where);
 			unset($where);
 		}
 		redirect(base_url($this->url));

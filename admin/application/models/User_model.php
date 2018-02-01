@@ -33,7 +33,7 @@ class User_model extends CI_Model {
     }
 
     public function remove_user($where) {
-        $this->mongo_db->where($where)->delete($this->collection);
+        return $this->mongo_db->where($where)->delete($this->collection);
     }
 
     public function remove_batch_user($data_where, $key) {
@@ -45,6 +45,7 @@ class User_model extends CI_Model {
             }
             $this->mongo_db->where($where)->delete($this->collection);
         }
+        return true;
     }
 
 }

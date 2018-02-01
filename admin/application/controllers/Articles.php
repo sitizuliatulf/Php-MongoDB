@@ -85,13 +85,12 @@ class Articles extends CI_Controller {
 			$this->do_edit($id);
 		} else {
 			$where['_id'] = new MongoId($id);
-			$user = $this->model->get_data_where($where);
+			$article = $this->model->get_data_where($where);
             unset($where);
-            die;
-			if (is_array($user) && count($user) > 0) {
-				$this->session->set_userdata('EDIT_USER', $user);
-				$data['is_admin_model'] = $this->model->data_is_admin();
-				$this->generate_view->view('pages/add_new_user', $data);
+			if (is_array($article) && count($article) > 0) {
+				$this->session->set_userdata('EDIT_ARTICLE', $article);
+				$options['js'] = ['./js/custom/article.js'];
+				$this->generate_view->view('pages/add_new_article', null, $options);
 			} else {
 				redirect(base_url());
 			}
@@ -104,18 +103,17 @@ class Articles extends CI_Controller {
         $this->form_validation->set_rules('content', 'Isi Artikel', 'required');
         if ($this->form_validation->run() === true) {
             $main_image = new stdClass();
-            if (isset($_FILES['main_image'])) {
-                $ext = explode($_FILES['main_image']['type'], '/');
-                $filename = sha1($_FILES['main_image']['name'].date("Y-m-d h:i:sa")).".$ext";
+			if (isset($_FILES['main_image']) && 
+			$this->input->post('is_delete') == 0 &&
+			!empty($_FILES['main_image']['name'])) {
+                $filename = sha1($_FILES['main_image']['name'].date("Y-m-d h:i:sa"));
                 $options = array(
                     'filename' => sha1($filename),
-                    'type' => $_FILES['type']
                 );
                 $id_image = $this->model->upload_image_filestream('main_image', $options);
                 
                 $main_image->id = $id_image;
                 $main_image->filename = sha1($filename);
-                $main_image->type = $_FILES['main_image']['type'];
                 unset($options, $id_image, $ext);
             }
             $data = array(
@@ -144,17 +142,38 @@ class Articles extends CI_Controller {
 	}
 
 	private function do_edit($id) {
-		$this->form_validation->set_rules('username', 'username', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'required');
-		$this->form_validation->set_rules('is_admin', 'Akses Admin', 'required');
+		$this->form_validation->set_rules('title', 'Judul', 'required');
+		$this->form_validation->set_rules('category', 'Kategori', 'required');
+		$this->form_validation->set_rules('content', 'Isi Artikel', 'required');
 		if ($this->form_validation->run() === true) {
 			$data = array(
-				'username' => $this->input->post('username'),
-				'email' => $this->input->post('email'),
-				'isAdmin' => $this->input->post('is_admin')
+				'title' => $this->input->post('title'),
+				'category' => $this->input->post('category'),
+				'content' => $this->input->post('content')
 			);
+			if ($this->input->post('is_delete') == 0) {
+				if (isset($_FILES['main_image']) && !empty($_FILES['main_image']['name'])) {
+					$filename = $this->input->post('filename_image');
+					if (isset($filename) && !empty(filename)) {
+						$where['filename'] = $filename;
+						$this->model->upload_image_filestream('main_image', $where, true);
+					} else {
+						$filename = sha1($_FILES['main_image']['name'].date("Y-m-d h:i:sa"));
+						$where = array(
+							'filename' => sha1($filename),
+						); 
+						$this->model->upload_image_filestream('main_image', $where, true);
+					}
+					unset($where);
+				}
+			} else {
+				$data['image'] = array();
+				$where['filename'] = $this->input->post('filename_image'); 
+				$this->model->remove_image_filestream($where);
+				unset($where);
+			}
 			$where['_id'] = new MongoId($id);
-			$this->model->update_user($data, $where);
+			$this->model->update_article($data, $where);
 			unset($data, $where);
 			$this->add_on->set_error_message($this->lang->line('success_edit'), 'success');
 			redirect(base_url($this->url));
@@ -168,14 +187,28 @@ class Articles extends CI_Controller {
 		if (empty($id)) {
 			$delete_all = $this->input->post('delete_all');
 			if (is_array($delete_all) && count($delete_all) > 0) {
-				$this->model->remove_batch_user($delete_all, '_id');
+				$this->model->remove_batch_article($delete_all, '_id');
 			}
 		} else {
 			$where['_id'] = new MongoId($v);
-			$this->mongo_db->where($where)->delete($this->collection);
+			$this->model->remove_article($where);
 			unset($where);
 		}
 		redirect(base_url($this->url));
+	}
+
+	public function image($filename = '') {
+		if (!empty($filename)) {
+			$where['filename'] = $filename;
+			$data = $this->model->get_image_filestream($where);
+			$stream = $data->getResource();
+			$image = '';
+			while (!feof($stream)) {
+                $image .= fread($stream, 8192);
+			}
+		}
+		header("Content-type: image/jpeg");
+		echo $image;
 	}
 
 }
