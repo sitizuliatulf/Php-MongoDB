@@ -1,6 +1,6 @@
 <section class="content">
   <div class="row">
-      <div class="col-md-12">
+      <!-- <div class="col-md-12">
         <div class="box box-solid collapsed-box">
             <div class="search-form box-header">
                 <h3 class="box-title">
@@ -13,33 +13,6 @@
                 <div class="box-body" style="display: none;">
                   <form action="<?php echo base_url('search') ?>" method="post">
                       <div class="row">
-                          <?php
-                          // looping untuk pencarian bedasarkan kolom yang ingin di tampilkan
-                          if (isset($column) && count($column) > 0) {  
-                            foreach ($column as $column_key => $column_value) {
-                          ?>
-                            <div class="col-sm-6">
-                                <div class="form-group ">
-                                <label class="control-label" for="title"><?php echo $this->lang->line($column_value['name']) ?></label>
-                                  <div class="row">
-                                      <div class="col-md-12">
-                                      <?php 
-                                      if ($column_value['type'] === 'string') {
-                                        echo '<input name="'.$column_value['name'].'" id="'.$column_value['name'].'" type="text" class="form-control " value="" placeholder="'.$this->lang->line($column_value['name']).'">';
-                                      } else if ($column_value['type'] === 'number') {
-                                        echo '<input name="'.$column_value['name'].'" id="'.$column_value['name'].'" type="number" class="form-control " value="" placeholder="'.$this->lang->line($column_value['name']).'">';
-                                      } else if ($column_value['type'] === 'date') {
-                                        echo '<input name="'.$column_value['name'].'" id="'.$column_value['name'].'" type="text" class="form-control input-date " value="" placeholder="'.$this->lang->line($column_value['name']).'">';
-                                      }
-                                      ?>
-                                      </div>
-                                  </div>
-                                </div>
-                            </div>
-                          <?php
-                            }
-                          }
-                          ?>
                       </div>
                       <div class="row">
                           <div class="col-md-12">
@@ -51,7 +24,7 @@
               </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="col-xs-12">
       <?php echo $this->session->flashdata('error_message') ?>
       <div class="box">
