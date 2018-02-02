@@ -12,7 +12,7 @@ class Add_on {
         if (is_object($session_user_login)) {
             if ($isBackend) {
                 if ($session_user_login->_id->{'$id'} !== '' && 
-                $session_user_login->isAdmin === "1") {
+                $session_user_login->isAdmin === 1) {
                     return true;
                 }
                 return false;

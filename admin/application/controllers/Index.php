@@ -33,7 +33,7 @@ class Index extends CI_Controller {
 			$where = array (
 				'email' => $email,
 				'password' => sha1($password),
-				'isAdmin' => "1"
+				'isAdmin' => 1
 			);
 			$data = $this->mongo_db->get_where($this->collection, $where);
 			if (count($data) > 0) {
@@ -47,11 +47,12 @@ class Index extends CI_Controller {
 
 				$this->session->set_userdata('session_user_login', $session_user_login);
 				unset($session_user_login->password, $where, $data, $id_user);
-				redirect(base_url('dashboard'));
+				redirect(base_url('articles'));
 			}
+		} else {
+			$this->add_on->set_error_message($this->lang->line('error_login'), 'danger');
+			redirect(base_url());
 		}
-		$this->add_on->set_error_message($this->lang->line('error_login'), 'danger');
-		redirect(base_url());
 	}
 
 	public function logout() {

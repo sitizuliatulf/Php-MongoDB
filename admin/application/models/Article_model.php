@@ -29,11 +29,7 @@ class Article_model extends CI_Model {
     }
 
     public function add_new_data($data) {
-        // masukkan data ke header dulu
-        $id_header =  $this->mongo_db->insert($this->collection, $data);
-        // masukkan data ke detail
-        $data['_id'] = new MongoId($id_header);
-        return $this->mongo_db->insert($this->collection_detail, $data);
+        return $this->mongo_db->insert($this->collection, $data);
     }
 
     public function update_article($data, $where) {
