@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Articles extends CI_Controller {
 	
-    public $collection = 'artciles';
+    public $collection = 'articles';
 	public $fields = array();
 	public $limit = 10;
 	public $default_order_by = array('createdDate' => 'ASC');

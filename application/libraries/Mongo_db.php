@@ -21,7 +21,7 @@ Class Mongo_db{
 	private $param = array();
 	private $activate;
 	private $connect;
-	private $db;
+	public $db;
 	private $hostname;
 	private $port;
 	private $database;

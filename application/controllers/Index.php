@@ -2,12 +2,30 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Index extends CI_Controller {
+	
+	public $collection;
+	public $url;
+	private $model;
+	public $default_order;
+	
 	public function __construct() {
 		parent::__construct();
 		$this->load->library('form_validation');
-		$this->load->model('auth_model');
+		$this->load->model('general_model');
+
+		$this->collection = 'articles';
+		$this->default_order = array('createdDate' => 'ASC');
+		$this->url = $this->router->fetch_class();
+		$this->model = $this->general_model;
 	}
+
 	public function index() {
+		$data['data'] = $this->model->get_data();
+		$options['css'] = ['./css/custom/article.css'];
+		$this->generate_view->view('articles', $data, $options);
+	}
+
+	public function login() {
 		$options['css'] = ['./css/custom/login.css'];
 		if (isset($_POST['login'])) {
 			$this->form_validation->set_rules('email', 'Email', 'required');

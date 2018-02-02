@@ -1,3 +1,4 @@
+    </div>
 </body>
 <?php 
     if (isset($js)) {

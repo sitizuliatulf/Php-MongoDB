@@ -1,0 +1,17 @@
+body {
+  background-color: #f3f3f3;
+}
+
+.navbar {
+  border-radius: 0px !important;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: white;
+  border: 0px !important;
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.login-wrapper {
+  width: 350px !important;
+  padding: 25px !important;
+}
