@@ -1,0 +1,35 @@
+.wrapper-detail-image {
+  height: 600px;
+  margin-top: 10px;
+}
+
+.wrapper-content-article {
+  background-color: white;
+  display: inline-block;
+  margin: 15px 0px !important;
+}
+
+.wrapper-commentar {
+  display: inline-block;
+  margin: 15px 0px !important;
+  background-color: white;
+  width: 100%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.wrapper-list-commentar {
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.wrapper-item-commentar {
+  display: inline-block;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 100%;
+}
+
+.need-space {
+  margin: 10px 0px !important;
+}

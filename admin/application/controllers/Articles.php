@@ -197,15 +197,16 @@ class Articles extends CI_Controller {
 	}
 
 	public function image($filename = '') {
+		$image = '';
 		if (!empty($filename)) {
 			$where['filename'] = $filename;
 			$data = $this->model->get_image_filestream($where);
 			$stream = $data->getResource();
-			$image = '';
 			while (!feof($stream)) {
                 $image .= fread($stream, 8192);
 			}
 		}
+		die;
 		header("Content-type: image/jpeg");
 		echo $image;
 	}

@@ -1,8 +1,14 @@
-.berita {
-  padding: 15px;
-  margin: 0px !important;
-  margin-top: 10px !important;
+.wrapper-article {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-top: 25px;
+  padding-bottom: 25px !important;
   background-color: white;
+}
+
+.wrapper-image-list-article {
+  width: 200px;
+  height: 200px;
 }
 
 .isi_berita {
