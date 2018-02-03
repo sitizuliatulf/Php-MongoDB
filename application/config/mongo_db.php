@@ -28,7 +28,7 @@
 //default array active db
 $config['mongo_db']['active'] = 'default';
 $config['mongo_db']['default']['no_auth'] = TRUE;
-$config['mongo_db']['default']['hostname'] = '192.168.1.8';
+$config['mongo_db']['default']['hostname'] = 'localhost';
 $config['mongo_db']['default']['port'] = '27017';
 $config['mongo_db']['default']['username'] = '';
 $config['mongo_db']['default']['password'] = '';

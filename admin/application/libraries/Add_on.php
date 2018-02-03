@@ -17,8 +17,7 @@ class Add_on {
                 }
                 return false;
             } else {
-                if ($session_user_login->_id->{'$id'} && 
-                $session_user_login->isDelete === false) {
+                if ($session_user_login->_id->{'$id'}) {    
                     return true;
                 }
                 return false;
