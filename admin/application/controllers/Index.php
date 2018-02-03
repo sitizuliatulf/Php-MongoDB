@@ -49,10 +49,9 @@ class Index extends CI_Controller {
 				unset($session_user_login->password, $where, $data, $id_user);
 				redirect(base_url('articles'));
 			}
-		} else {
-			$this->add_on->set_error_message($this->lang->line('error_login'), 'danger');
-			redirect(base_url());
 		}
+		$this->add_on->set_error_message($this->lang->line('error_login'), 'danger');
+		redirect(base_url());
 	}
 
 	public function logout() {
