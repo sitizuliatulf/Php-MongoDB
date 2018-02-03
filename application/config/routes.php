@@ -55,3 +55,4 @@ $route['translate_uri_dashes'] = FALSE;
 $route['image'] = 'index/get_image_from_db';
 $route['baca-artikel/(:any)'] = 'index/detail/$1';
 $route['simpan-komentar'] = 'index/save_commentar'; 
+$route['cari'] = 'index/index';

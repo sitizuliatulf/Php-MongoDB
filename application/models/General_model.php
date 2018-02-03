@@ -28,6 +28,12 @@ class General_model extends CI_Model {
     return $this->mongo_db->insert($this->collection, $data);
   }
 
+  public function get_data_like($field, $value) {
+    $this->mongo_db->like($field, $value, 'im');
+    $this->mongo_db->order_by($this->default_order);
+    return $this->mongo_db->get($this->collection);
+  }
+
   // custom 
   public function get_data_custom($collection_name, $where = [], $order_by = []) {
     if (count($where) > 0 ) {

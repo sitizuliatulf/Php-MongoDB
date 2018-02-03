@@ -13,14 +13,12 @@ class Add_on {
         if (is_object($session_user_login)) {
             if ($isBackend) {
                 if ($session_user_login->_id->{'$id'} !== '' && 
-                $session_user_login->isAdmin === true && 
-                $session_user_login->isDelete === false) {
+                $session_user_login->isAdmin === true) {
                     return true;
                 }
                 return false;
             } else {
-                if ($session_user_login->_id->{'$id'} && 
-                $session_user_login->isDelete === false) {
+                if ($session_user_login->_id->{'$id'}) {
                     return true;
                 }
                 return false;

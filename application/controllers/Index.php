@@ -20,7 +20,14 @@ class Index extends CI_Controller {
 	}
 
 	public function index() {
-		$data['data'] = $this->model->get_data();
+		if (isset($_GET['cari'])) {
+			$field = 'title';
+			$this->session->set_userdata('search', $_GET['cari']);
+			$data['data'] = $this->model->get_data_like($field, $_GET['cari']);
+		} else {
+			$this->session->unset_userdata('search');
+			$data['data'] = $this->model->get_data();
+		}
 		$options['css'] = ['./css/custom/article.css'];
 		$this->generate_view->view('articles', $data, $options);
 	}
@@ -89,15 +96,13 @@ class Index extends CI_Controller {
 				$email = $this->input->post('email');
 				$pass = $this->input->post('password');
 				$where = array('email' => $email, 'password' => sha1($pass));
-				$user = $this->auth_model->get_user('users', $where);
+				$user = $this->model->get_data_custom('users', $where);
 				unset($where, $email, $pass);
 				if (count($user) > 0) {
-					// jangan simpan informasi password user
 					unset($user['password']);
-					// ubah data ke objek karena data yang dibalikan dari db berupa array
 					$user = json_decode(json_encode(array_shift($user)), FALSE);
 					$this->session->set_userdata('session_user_login_frontend', $user);
-					redirect(base_url('index/home'));
+					redirect(base_url());
 				} else {
 					$html_eror = '<div class="alert alert-danger">
 									<h4>Gagal! </h4>
@@ -119,11 +124,49 @@ class Index extends CI_Controller {
 		redirect(base_url());
 	}
 
-	public function home() {
-		if ($this->add_on->user_is_login()) {
-			$this->generate_view->view('home');
+	public function register() {
+		if (isset($_POST['register'])) {
+			$this->form_validation->set_rules('username', 'Username wajib di isi', 'required');
+			$this->form_validation->set_rules('email', 'email', 'required|callback_email_already_exist');
+			$this->form_validation->set_rules('password', 'Kata sandi tidak sesuai','required|callback_match_password_with_conf');
+			if ($this->form_validation->run() == TRUE) {
+				$data = array(
+					'email' => $this->input->post('email'),
+					'password' => $this->input->post('password'),
+					'username' => $this->input->post('username'),
+					'isAdmin' => 0,
+					'lastLogin' => '',
+					'registerDate' => date("Y-m-d h:i:sa"),
+				);
+				$this->model->add_new_data($data);
+				unset($data);
+				redirect(base_url());
+			} else {
+				$this->generate_view->view('register');
+			}
 		} else {
-			echo 'anda belum login';
+			$this->generate_view->view('register');
+		}
+	}
+
+	public function email_already_exist($email) {
+		$where = array('email' => $email);
+		$email_exist = $this->model->get_data_custom('users', $where);
+		unset($where);
+		if (count($email_exist) > 0) {
+			$this->form_validation->set_message('email_already_exist', 'Email sudah terdaftar');
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+    public function match_password_with_conf($password) {
+		if ($this->input->post('confirmation_password') != $password) {
+			$this->form_validation->set_message('match_password_with_conf', 'Kata sandi dan konfirmasi kata sandi tidak sesuai');
+			return false;
+		} else {
+			return true;
 		}
 	}
 }

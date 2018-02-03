@@ -13,7 +13,7 @@
           </div>
           <div class="col-md-8 col-xs-8">
             <h2><?php echo $v['title'] ?></h2>
-            <p><?php echo substr($v['content'], 0, 40) ?></p>
+            <p><?php echo substr($v['content'], 0, 300).'...' ?></p>
             <a href="<?php echo base_url('baca-artikel/').$v['_id'] ?>">
               Baca lebih lanjut
             </a>
@@ -22,7 +22,11 @@
       </div>
     <?php
         }
-      } 
+      } else {
+        if (!empty($this->session->userdata('search'))) {
+          echo '<div class="row" style="margin-top: 50px;"><div class="col-md-12 text-center">Tidak ditemukan kata kunci <b>'. $this->session->userdata('search'). '</b> klik <a href="'.base_url().'">disini</a> untuk kembali</div></div>';
+        }
+      }
     ?>
   </div>
 </div>
