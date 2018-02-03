@@ -138,7 +138,7 @@ class Index extends CI_Controller {
 					'lastLogin' => '',
 					'registerDate' => date("Y-m-d h:i:sa"),
 				);
-				$this->model->add_new_data($data);
+				$this->model->add_new_data('users',$data);
 				unset($data);
 				redirect(base_url());
 			} else {
